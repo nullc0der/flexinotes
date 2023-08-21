@@ -5,8 +5,12 @@ import React, { useState } from "react";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
+import { v4 as uuid4 } from "uuid";
 
 import useClickOutside from "@/lib/hooks/useClickOutside";
+import { useDispatch } from "@/lib/redux/store";
+import { noteSlice } from "@/lib/redux/slices/noteSlice";
+
 import { CloseIcon } from "./CloseIcon";
 
 type Note = typeof initialValues;
@@ -14,6 +18,7 @@ type Note = typeof initialValues;
 const initialValues = { title: "", content: "" };
 
 export default function CreateNote() {
+  const dispatch = useDispatch();
   const [note, setNote] = useState<Note>(initialValues);
   const [showFull, setShowFull] = useState<boolean>(false);
 
@@ -28,7 +33,14 @@ export default function CreateNote() {
 
   const saveCleanAndHide = () => {
     if (note.title || note.content) {
-      console.log(note);
+      dispatch(
+        noteSlice.actions.addNote({
+          title: note.title,
+          content: note.content,
+          dateCreated: new Date().toISOString(),
+          uuid: uuid4(),
+        }),
+      );
     }
     cleanAndHide();
   };
