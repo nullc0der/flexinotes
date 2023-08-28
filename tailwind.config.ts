@@ -16,6 +16,7 @@ const config: Config = {
     },
   },
   darkMode: "class",
+  //TODO: Change colors
   plugins: [nextui()],
 };
 

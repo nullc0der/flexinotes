@@ -3,8 +3,7 @@ import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 
 import Link from "next/link";
-
-import { SearchIcon } from "./SearchIcon";
+import { Search } from "react-feather";
 
 export default function Nav() {
   return (
@@ -23,7 +22,7 @@ export default function Nav() {
           }}
           placeholder="Search notes..."
           size="sm"
-          startContent={<SearchIcon size={18} />}
+          startContent={<Search size={18} />}
           type="search"
         />
         <Button

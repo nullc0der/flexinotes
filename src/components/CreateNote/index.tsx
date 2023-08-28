@@ -6,12 +6,11 @@ import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
 import { v4 as uuid4 } from "uuid";
+import { XSquare } from "react-feather";
 
 import useClickOutside from "@/lib/hooks/useClickOutside";
 import { useDispatch } from "@/lib/redux/store";
 import { noteSlice } from "@/lib/redux/slices/noteSlice";
-
-import { CloseIcon } from "./CloseIcon";
 
 type Note = typeof initialValues;
 
@@ -87,7 +86,7 @@ export default function CreateNote() {
                 isIconOnly
                 onClick={cleanAndHide}
               >
-                <CloseIcon size={18} />
+                <XSquare size={18} />
               </Button>
             </div>
           </div>

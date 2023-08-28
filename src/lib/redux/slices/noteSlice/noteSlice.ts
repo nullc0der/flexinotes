@@ -27,7 +27,7 @@ export const noteSlice = createSlice({
       state.notes.push(action.payload);
     },
     removeNote: (state, action: PayloadAction<string>) => {
-      state.notes.filter((note) => note.uuid !== action.payload);
+      state.notes = state.notes.filter((note) => note.uuid !== action.payload);
     },
     updateNote: (state, action: PayloadAction<Note>) => {
       state.notes.map((note) =>

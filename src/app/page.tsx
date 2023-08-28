@@ -1,5 +1,6 @@
 import CreateNote from "@/components/CreateNote";
 import Nav from "@/components/Nav";
+import Notes from "@/components/Notes";
 
 export default function HomePage() {
   return (
@@ -7,6 +8,7 @@ export default function HomePage() {
       <Nav />
       <main className="container relative mx-auto">
         <CreateNote />
+        <Notes />
       </main>
     </div>
   );
