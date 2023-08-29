@@ -6,7 +6,7 @@ import type { ReduxState } from "@/lib/redux/store";
 export const selectNotes = createSelector(
   [
     (state: ReduxState) => state.note.notes,
-    (state: ReduxState) => state.note.searchTerm,
+    (state: ReduxState) => state.ui.searchTerm,
   ],
   (notes, searchTerm) => {
     if (searchTerm) {

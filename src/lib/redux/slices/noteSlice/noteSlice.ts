@@ -9,14 +9,12 @@ export interface Note {
 
 interface NoteSliceState {
   state: "loading" | "idle" | "error";
-  searchTerm: string;
   notes: Note[];
   errorMessage: string;
 }
 
 const initialState: NoteSliceState = {
   state: "idle",
-  searchTerm: "",
   notes: [],
   errorMessage: "",
 };
@@ -35,9 +33,6 @@ export const noteSlice = createSlice({
       state.notes.map((note) =>
         note.uuid === action.payload.uuid ? action.payload : note,
       );
-    },
-    updateSearchTerm: (state, action: PayloadAction<string>) => {
-      state.searchTerm = action.payload;
     },
   },
 });

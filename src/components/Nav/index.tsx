@@ -10,7 +10,7 @@ import { Search, ArrowRightCircle, ArrowLeft } from "react-feather";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useDispatch } from "@/lib/redux/store";
-import { noteSlice } from "@/lib/redux/slices/noteSlice";
+import { uiSlice } from "@/lib/redux/slices/uiSlice";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Nav() {
@@ -19,7 +19,7 @@ export default function Nav() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(noteSlice.actions.updateSearchTerm(searchValue));
+    dispatch(uiSlice.actions.updateSearchTerm(searchValue));
   }, [searchValue, dispatch]);
 
   const onSearchInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
