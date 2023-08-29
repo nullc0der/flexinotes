@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 
+import { motion } from "framer-motion";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
@@ -53,13 +54,16 @@ export default function CreateNote() {
 
   return (
     <div className="mt-8 flex justify-center">
-      <div className="basis-1/2">
+      <motion.div layout className="basis-1/2">
         {!showFull ? (
-          <Input
-            radius="full"
-            placeholder="Add a note"
-            onClick={() => setShowFull(!showFull)}
-          />
+          <div
+            className="cursor-pointer rounded-md bg-default-100 p-4"
+            onClick={() => setShowFull(true)}
+          >
+            <motion.p layout="preserve-aspect" className="text-sm font-thin">
+              Create a new note
+            </motion.p>
+          </div>
         ) : (
           <div className="flex flex-col gap-2" ref={ref}>
             <Input
@@ -91,7 +95,7 @@ export default function CreateNote() {
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }

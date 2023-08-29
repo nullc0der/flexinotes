@@ -32,7 +32,8 @@ export default function NoteComponent({
     close: "h-full w-full",
   };
   const cardContentClasses = {
-    common: "h-full w-full rounded-lg bg-default-100 p-4 shadow-md",
+    common:
+      "h-full w-full rounded-lg bg-default-100 p-4 shadow-md cursor-pointer",
     open: "overflow-x-hidden overflow-y-scroll",
     close: "overflow-hidden",
   };
