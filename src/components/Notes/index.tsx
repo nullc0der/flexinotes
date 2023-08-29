@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-// TODO: Responsiveness
-// TODO: Add search functionality
 import { useSelector, useDispatch } from "@/lib/redux/store";
 import { selectNotes, noteSlice } from "@/lib/redux/slices/noteSlice";
 
