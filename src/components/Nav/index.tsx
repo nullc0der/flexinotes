@@ -4,6 +4,7 @@ import { Input } from "@nextui-org/input";
 
 import Link from "next/link";
 import { Search } from "react-feather";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export default function Nav() {
   return (
@@ -25,16 +26,10 @@ export default function Nav() {
           startContent={<Search size={18} />}
           type="search"
         />
-        <Button
-          as={Link}
-          color="default"
-          href="#"
-          variant="flat"
-          radius="full"
-          size="md"
-        >
+        <Button as={Link} color="default" href="#" variant="flat" size="md">
           Login
         </Button>
+        <ThemeSwitcher />
       </NavbarContent>
     </Navbar>
   );

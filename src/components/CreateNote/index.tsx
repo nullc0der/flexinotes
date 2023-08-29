@@ -60,7 +60,7 @@ export default function CreateNote() {
             className="cursor-pointer rounded-md bg-default-100 p-4"
             onClick={() => setShowFull(true)}
           >
-            <motion.p layout="preserve-aspect" className="text-sm font-thin">
+            <motion.p layout="preserve-aspect" className="text-sm font-light">
               Create a new note
             </motion.p>
           </div>

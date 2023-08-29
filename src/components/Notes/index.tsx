@@ -2,9 +2,7 @@
 
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-// TODO: Note create form animation - not completed distorts when note created
 // TODO: Responsiveness
-// TODO: Add theme switcher
 import { useSelector, useDispatch } from "@/lib/redux/store";
 import { selectNotes, noteSlice } from "@/lib/redux/slices/noteSlice";
 
