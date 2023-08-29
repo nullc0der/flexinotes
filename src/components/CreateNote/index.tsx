@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
@@ -54,48 +54,63 @@ export default function CreateNote() {
 
   return (
     <div className="mt-8 flex justify-center">
-      <motion.div layout className="basis-1/2">
-        {!showFull ? (
-          <div
-            className="cursor-pointer rounded-md bg-default-100 p-4"
-            onClick={() => setShowFull(true)}
-          >
-            <motion.p layout="preserve-aspect" className="text-sm font-light">
-              Create a new note
-            </motion.p>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-2" ref={ref}>
-            <Input
-              label="Title"
-              value={note.title}
-              onChange={onChangeNote}
-              name="title"
-            />
-            <Textarea
-              label="Content"
-              value={note.content}
-              onChange={onChangeNote}
-              description="MarkDown is supported"
-              name="content"
-            />
-            <Divider className="mx-auto my-2 w-3/4" />
-            <div className="flex justify-end gap-2">
-              <Button variant="flat" radius="full" onClick={saveCleanAndHide}>
-                Create
-              </Button>
-              <Button
-                variant="flat"
-                radius="full"
-                isIconOnly
-                onClick={cleanAndHide}
-              >
-                <XSquare size={18} />
-              </Button>
-            </div>
-          </div>
-        )}
-      </motion.div>
+      <div className="basis-1/2">
+        <AnimatePresence mode="wait">
+          {!showFull ? (
+            <motion.div
+              key={`form-showfull-${showFull}`}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.3 }}
+              className="cursor-pointer rounded-md bg-default-100 p-4"
+              onClick={() => setShowFull(true)}
+            >
+              <motion.p layout="preserve-aspect" className="text-sm font-light">
+                Create a new note
+              </motion.p>
+            </motion.div>
+          ) : (
+            <motion.div
+              key={`form-showfull-${showFull}`}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.3 }}
+              className="flex flex-col gap-2"
+              ref={ref}
+            >
+              <Input
+                label="Title"
+                value={note.title}
+                onChange={onChangeNote}
+                name="title"
+              />
+              <Textarea
+                label="Content"
+                value={note.content}
+                onChange={onChangeNote}
+                description="MarkDown is supported"
+                name="content"
+              />
+              <Divider className="mx-auto my-2 w-3/4" />
+              <div className="flex justify-end gap-2">
+                <Button variant="flat" radius="full" onClick={saveCleanAndHide}>
+                  Create
+                </Button>
+                <Button
+                  variant="flat"
+                  radius="full"
+                  isIconOnly
+                  onClick={cleanAndHide}
+                >
+                  <XSquare size={18} />
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
