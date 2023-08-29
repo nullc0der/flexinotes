@@ -54,7 +54,7 @@ export default function CreateNote() {
 
   return (
     <div className="mt-8 flex justify-center">
-      <div className="basis-1/2">
+      <div className="basis-full px-4 md:basis-1/2 md:px-0">
         <AnimatePresence mode="wait">
           {!showFull ? (
             <motion.div
@@ -66,9 +66,7 @@ export default function CreateNote() {
               className="cursor-pointer rounded-md bg-default-100 p-4"
               onClick={() => setShowFull(true)}
             >
-              <motion.p layout="preserve-aspect" className="text-sm font-light">
-                Create a new note
-              </motion.p>
+              <p className="text-sm font-light">Create a new note</p>
             </motion.div>
           ) : (
             <motion.div

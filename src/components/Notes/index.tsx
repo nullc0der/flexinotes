@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 // TODO: Responsiveness
+// TODO: Add search functionality
 import { useSelector, useDispatch } from "@/lib/redux/store";
 import { selectNotes, noteSlice } from "@/lib/redux/slices/noteSlice";
 
@@ -19,7 +20,7 @@ export default function Notes() {
   );
 
   return (
-    <div className="my-8 flex flex-wrap gap-x-4 gap-y-6">
+    <div className="flex flex-wrap justify-center py-4 md:justify-start">
       <AnimatePresence>
         {sortedNotes.map((note) => (
           <NoteComponent

@@ -1,4 +1,5 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 
 import { format } from "date-fns";
 import { Divider } from "@nextui-org/divider";
@@ -24,11 +25,12 @@ export default function NoteComponent({
   unSelectCard,
   deleteNote,
 }: NoteProps) {
+  const isMd = useMediaQuery({ query: "(min-width: 768px)" });
   const itemWidth = React.useMemo(() => getRandomNumber(250, 350), []);
   const noteOpen = selectedCardId === note.uuid;
   const cardClasses = {
     common: "relative",
-    open: "z-[41] h-[250px] w-[450px] top-[30%]",
+    open: `z-[41] h-[250px] top-[30%] ${isMd ? "w-[450px]" : "w-full"}`,
     close: "h-full w-full",
   };
   const cardContentClasses = {
@@ -45,8 +47,9 @@ export default function NoteComponent({
       exit={{ opacity: 0, scale: 0 }}
       style={{
         height: "150px",
-        width: `${itemWidth}px`,
+        width: isMd ? `${itemWidth}px` : "100%",
       }}
+      className="mx-4 my-4"
       onClick={!noteOpen ? selectCard : () => {}}
     >
       {/* Overlay */}
