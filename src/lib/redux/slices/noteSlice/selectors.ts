@@ -19,3 +19,11 @@ export const selectNotes = createSelector(
     return notes;
   },
 );
+
+export const selectEditingNote = createSelector(
+  [
+    (state: ReduxState) => state.note.notes,
+    (state: ReduxState) => state.ui.editingNoteId,
+  ],
+  (notes, editingNoteId) => notes.find((note) => note.uuid === editingNoteId),
+);

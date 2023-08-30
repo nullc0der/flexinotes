@@ -30,7 +30,7 @@ export const noteSlice = createSlice({
       state.notes = state.notes.filter((note) => note.uuid !== action.payload);
     },
     updateNote: (state, action: PayloadAction<Note>) => {
-      state.notes.map((note) =>
+      state.notes = state.notes.map((note) =>
         note.uuid === action.payload.uuid ? action.payload : note,
       );
     },

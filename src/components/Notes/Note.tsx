@@ -16,6 +16,7 @@ type NoteProps = {
   selectCard: () => void;
   unSelectCard: () => void;
   deleteNote: () => void;
+  editNote: () => void;
 };
 
 export default function NoteComponent({
@@ -24,6 +25,7 @@ export default function NoteComponent({
   selectCard,
   unSelectCard,
   deleteNote,
+  editNote,
 }: NoteProps) {
   const isMd = useMediaQuery({ query: "(min-width: 768px)" });
   const itemWidth = React.useMemo(() => getRandomNumber(250, 350), []);
@@ -107,7 +109,14 @@ export default function NoteComponent({
             <Button size="sm" isIconOnly className="mr-2" onPress={deleteNote}>
               <Trash2 size={14} />
             </Button>
-            <Button size="sm" isIconOnly>
+            <Button
+              size="sm"
+              isIconOnly
+              onClick={(e) => {
+                e.nativeEvent.stopImmediatePropagation();
+                editNote();
+              }}
+            >
               <Edit3 size={14} />
             </Button>
           </motion.div>

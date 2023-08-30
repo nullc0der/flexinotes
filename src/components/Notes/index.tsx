@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "@/lib/redux/store";
 import { selectNotes, noteSlice } from "@/lib/redux/slices/noteSlice";
+import { uiSlice } from "@/lib/redux/slices/uiSlice";
 
 import NoteComponent from "./Note";
 
@@ -28,6 +29,12 @@ export default function Notes() {
             selectCard={() => setSelectedCardId(note.uuid)}
             unSelectCard={() => setSelectedCardId("")}
             deleteNote={() => dispatch(noteSlice.actions.removeNote(note.uuid))}
+            editNote={() => {
+              dispatch(uiSlice.actions.updateEditingNoteId(note.uuid));
+              document
+                .querySelector("#createNoteForm")!
+                .scrollIntoView({ behavior: "smooth" });
+            }}
           />
         ))}
       </AnimatePresence>

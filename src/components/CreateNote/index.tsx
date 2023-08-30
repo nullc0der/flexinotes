@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Input, Textarea } from "@nextui-org/input";
@@ -10,50 +10,77 @@ import { v4 as uuid4 } from "uuid";
 import { XSquare } from "react-feather";
 
 import useClickOutside from "@/lib/hooks/useClickOutside";
-import { useDispatch } from "@/lib/redux/store";
-import { noteSlice } from "@/lib/redux/slices/noteSlice";
+import { useDispatch, useSelector } from "@/lib/redux/store";
+import { noteSlice, selectEditingNote } from "@/lib/redux/slices/noteSlice";
+import { uiSlice } from "@/lib/redux/slices/uiSlice";
 
-type Note = typeof initialValues;
+type NoteForm = typeof initialValues;
 
 const initialValues = { title: "", content: "" };
 
 export default function CreateNote() {
   const dispatch = useDispatch();
-  const [note, setNote] = useState<Note>(initialValues);
+  const editingNote = useSelector(selectEditingNote);
+
+  const [noteForm, setNoteForm] = useState<NoteForm>(initialValues);
   const [showFull, setShowFull] = useState<boolean>(false);
+  const [isEditingNote, setIsEditingNote] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (editingNote) {
+      setNoteForm({
+        title: editingNote.title,
+        content: editingNote.content,
+      });
+      setIsEditingNote(true);
+      setShowFull(true);
+    }
+  }, [editingNote]);
 
   const ref = React.useRef<HTMLDivElement>(null);
 
   const onChangeNote = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNote({
-      ...note,
+    setNoteForm({
+      ...noteForm,
       [e.target.name]: e.target.value,
     });
   };
 
   const saveCleanAndHide = () => {
-    if (note.title || note.content) {
-      dispatch(
-        noteSlice.actions.addNote({
-          title: note.title,
-          content: note.content,
-          dateCreated: new Date().toISOString(),
-          uuid: uuid4(),
-        }),
-      );
+    if (noteForm.title || noteForm.content) {
+      isEditingNote && editingNote
+        ? dispatch(
+            noteSlice.actions.updateNote({
+              ...editingNote,
+              title: noteForm.title,
+              content: noteForm.content,
+            }),
+          )
+        : dispatch(
+            noteSlice.actions.addNote({
+              title: noteForm.title,
+              content: noteForm.content,
+              dateCreated: new Date().toISOString(),
+              uuid: uuid4(),
+            }),
+          );
     }
     cleanAndHide();
   };
 
   const cleanAndHide = () => {
-    setNote(initialValues);
+    setNoteForm(initialValues);
     setShowFull(false);
+    if (isEditingNote) {
+      setIsEditingNote(false);
+      dispatch(uiSlice.actions.updateEditingNoteId(""));
+    }
   };
 
   useClickOutside(ref, saveCleanAndHide);
 
   return (
-    <div className="mt-8 flex justify-center">
+    <div className="mt-8 flex justify-center" id="createNoteForm">
       <div className="basis-full px-4 md:basis-1/2 md:px-0">
         <AnimatePresence mode="wait">
           {!showFull ? (
@@ -80,13 +107,13 @@ export default function CreateNote() {
             >
               <Input
                 label="Title"
-                value={note.title}
+                value={noteForm.title}
                 onChange={onChangeNote}
                 name="title"
               />
               <Textarea
                 label="Content"
-                value={note.content}
+                value={noteForm.content}
                 onChange={onChangeNote}
                 description="MarkDown is supported"
                 name="content"
@@ -94,7 +121,7 @@ export default function CreateNote() {
               <Divider className="mx-auto my-2 w-3/4" />
               <div className="flex justify-end gap-2">
                 <Button variant="flat" radius="full" onClick={saveCleanAndHide}>
-                  Create
+                  {isEditingNote ? "Update" : "Create"}
                 </Button>
                 <Button
                   variant="flat"
