@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
-import Link from "next/link";
+// import Link from "next/link";
 import { Search, ArrowRightCircle, ArrowLeft } from "react-feather";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -62,7 +62,7 @@ export default function Nav() {
               >
                 <Search size={14} />
               </Button>
-              <Button
+              {/* <Button
                 as={Link}
                 color="default"
                 href="#"
@@ -70,7 +70,7 @@ export default function Nav() {
                 size="md"
               >
                 Login
-              </Button>
+              </Button> */}
               <ThemeSwitcher />
             </NavbarContent>
           </motion.div>

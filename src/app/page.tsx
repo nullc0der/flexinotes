@@ -1,6 +1,8 @@
 import CreateNote from "@/components/CreateNote";
 import Nav from "@/components/Nav";
 import Notes from "@/components/Notes";
+// TODO: Add firebase login and storage
+// TODO: Add markdown support
 
 export default function HomePage() {
   return (
