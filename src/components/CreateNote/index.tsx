@@ -34,6 +34,10 @@ export default function CreateNote() {
       });
       setIsEditingNote(true);
       setShowFull(true);
+    } else {
+      setNoteForm(initialValues);
+      setIsEditingNote(false);
+      setShowFull(false);
     }
   }, [editingNote]);
 

@@ -17,7 +17,7 @@ const config: Config = {
   },
   darkMode: "class",
   //TODO: Change colors
-  plugins: [nextui()],
+  plugins: [nextui(), require("@tailwindcss/typography")],
 };
 
 export default config;

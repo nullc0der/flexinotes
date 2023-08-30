@@ -6,6 +6,7 @@ import { Divider } from "@nextui-org/divider";
 import { Button } from "@nextui-org/button";
 import { AnimatePresence, motion } from "framer-motion";
 import { Trash2, Edit3 } from "react-feather";
+import ReactMarkdown from "react-markdown";
 
 import type { Note } from "@/lib/redux/slices/noteSlice";
 import { getRandomNumber } from "@/lib/utils";
@@ -92,27 +93,40 @@ export default function NoteComponent({
               {format(new Date(note.dateCreated), "dd/MM/yyyy h:mm aaa")}
             </p>
           </motion.div>
-          <motion.h2 layout="preserve-aspect" className="text-xl font-bold">
-            {note.title}
-          </motion.h2>
-          <Divider className="mt-2" />
-          <motion.p
-            layout="preserve-aspect"
-            className="text-md mt-2 font-normal"
-          >
-            {note.content}
-          </motion.p>
+          {!!note.title && (
+            <motion.h2 layout="preserve-aspect" className="text-xl font-bold">
+              {note.title}
+            </motion.h2>
+          )}
+          {!!(note.title && note.content) && <Divider className="mt-2" />}
+          {!!note.content && (
+            <motion.div layout="preserve-aspect" className="mt-2">
+              {/* TODO: Add styling for elements */}
+              <ReactMarkdown className="prose dark:prose-invert prose-headings:m-0 prose-p:m-0 prose-hr:my-2">
+                {note.content}
+              </ReactMarkdown>
+            </motion.div>
+          )}
           <motion.div
             layout="preserve-aspect"
             className="absolute -bottom-2 right-2"
           >
-            <Button size="sm" isIconOnly className="mr-2" onPress={deleteNote}>
+            <Button
+              size="sm"
+              isIconOnly
+              className="mr-2"
+              onClick={(e) => {
+                e.nativeEvent.stopImmediatePropagation();
+                deleteNote();
+              }}
+            >
               <Trash2 size={14} />
             </Button>
             <Button
               size="sm"
               isIconOnly
               onClick={(e) => {
+                if (noteOpen) unSelectCard();
                 e.nativeEvent.stopImmediatePropagation();
                 editNote();
               }}
