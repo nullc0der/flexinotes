@@ -17,5 +17,5 @@
     "**/node_modules/*/**": true,
     "**/.next": true
   },
-  "cSpell.words": ["nextui", "persistor", "tailwindcss"]
+  "cSpell.words": ["flexinotes", "nextui", "persistor", "tailwindcss"]
 }

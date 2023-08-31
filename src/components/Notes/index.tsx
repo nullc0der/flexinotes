@@ -19,7 +19,7 @@ export default function Notes() {
   );
 
   return (
-    <div className="flex flex-wrap justify-center py-4 md:justify-start">
+    <div className="flex flex-wrap justify-center pb-16 pt-4 md:justify-start">
       <AnimatePresence>
         {sortedNotes.map((note) => (
           <NoteComponent

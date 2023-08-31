@@ -50,7 +50,7 @@ export default function Nav() {
             className="flex w-full gap-4"
           >
             <NavbarBrand>
-              <p className="font-bold text-inherit">Note App</p>
+              <p className="font-bold text-inherit">FlexiNotes</p>
             </NavbarBrand>
             <NavbarContent justify="end" as="div" className="items-center">
               <Button
