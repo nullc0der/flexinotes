@@ -9,7 +9,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const themeName = theme === "system" ? resolvedTheme : theme;
 
   useEffect(() => {
     setMounted(true);
@@ -23,11 +24,11 @@ export function ThemeSwitcher() {
       color="default"
       variant="flat"
       size="md"
-      title={`Change theme to ${theme === "dark" ? "light" : "dark"}`}
-      onPress={() => setTheme(theme === "dark" ? "light" : "dark")}
+      title={`Change theme to ${themeName === "dark" ? "light" : "dark"}`}
+      onPress={() => setTheme(themeName === "dark" ? "light" : "dark")}
     >
       <AnimatePresence mode="wait">
-        {theme === "dark" ? (
+        {themeName === "dark" ? (
           <motion.div
             key="light"
             initial={{ opacity: 0, y: 10 }}

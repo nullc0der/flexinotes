@@ -27,7 +27,7 @@ export default function RootLayout({
         className={`${inter.variable} min-h-screen bg-white font-sans  text-black dark:bg-neutral-950 dark:text-white`}
       >
         <Providers>{children}</Providers>
-        <Analytics />
+        {!!(process.env.NODE_ENV === "production") && <Analytics />}
       </body>
     </html>
   );

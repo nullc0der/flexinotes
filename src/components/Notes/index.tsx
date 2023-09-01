@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "@/lib/redux/store";
 import { selectNotes, noteSlice } from "@/lib/redux/slices/noteSlice";
 import { uiSlice } from "@/lib/redux/slices/uiSlice";
 
-import NoteComponent from "./Note";
+const NoteComponent = dynamic(() => import("./Note"));
 
 export default function Notes() {
   const [selectedCardId, setSelectedCardId] = useState<string>("");
